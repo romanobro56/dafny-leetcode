@@ -29,4 +29,22 @@ method twoSum(nums: seq<int>, target: int) returns (pair: (int, int))
     invariant forall i' | 0 <= i' < j :: nums[i'] in e_to_i
     invariant forall e | e in e_to_i :: 0 <= e_to_i[e] < j && nums[e_to_i[e]] == e
     invariant forall i', j' | i' < j && j' < j :: !correct_pair((i', j'), nums, target)
+    {
+      var element := nums[j];
+      var rest := target - element;
+      if rest in e_to_i {
+        var i := e_to_i[rest];
+        return (i,j):
+      } else {
+        e_to_i := e_to_i[element := j];
+      }
+    }
+    // unreachable
+}
+
+method Main() {
+  var nums := [2, 7, 11, 15];
+  var target := 9;
+  var (i,j) = twoSum(nums, target)
+  print "Indecies: ", i, ", ", j, "\n";
 }
