@@ -1,13 +1,12 @@
-ghost function SumSet(S: set<nat>, nums:seq<int>): int 
+ghost function SumSet(S: set<nat>, nums: seq<int>): int
     requires forall i | i in S :: i < |nums|
     decreases |S|
-    {
-        if S == {} then 0
-        else {
-            var i: nat :| i in S;
-            nums[i] + SumSet(S - {i}, nums)
-        }
-    }
+{
+    if S == {} then 0
+    else
+        var i: nat :| i in S;
+        nums[i] + SumSet(S - {i}, nums)
+}
 
 
 ghost predicate money_extracted(value: int, nums: seq<int>) {
